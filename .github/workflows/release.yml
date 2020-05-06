@@ -12,8 +12,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Get latest
         run: echo "##[set-output name=LATEST;]$(sh scripts/get-latest.sh)"
+        id: release
       - name: display latest
-        run: echo "${{ steps.nvm.outputs.NVMRC }}"
+        run: echo "${{ steps.release.outputs.LATEST }}"
       - name: Final
-        if: ${{ steps.nvm.outputs.LATEST }} == "OK"
+        if: ${{ steps.release.outputs.LATEST }} == "OK"
         run: echo "OK"
