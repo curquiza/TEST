@@ -15,6 +15,8 @@ jobs:
       - name: Get latest
         run: echo "##[set-output name=is_latest;]$(sh scripts/get-latest.sh)"
         id: release
+      - name: display latest
+        run: echo "${{ steps.release.outputs.is_latest }}"
   myrelease:
     needs: check_latest
     name: test release
@@ -25,7 +27,7 @@ jobs:
 #         run: echo "##[set-output name=is_latest;]$(sh scripts/get-latest.sh)"
 #         id: release
       - name: display latest
-        run: echo "${{ steps.release.outputs.is_latest }}"
+        run: echo "${{ jobs.check_latest.steps.release.outputs.is_latest }}"
       - name: Final
         run: echo "OK"
         if: steps.release.outputs.is_latest == 'true'
