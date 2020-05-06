@@ -9,10 +9,11 @@ jobs:
     name: test release
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - run: ls -la
       - run: pwd
       - name: run script
-        run: sh scripts/test.sh
+        run: sh scripts/get-latest.sh
       - name: get latest
         run: ::set-env latest=$(sh test.sh)
       - name: echo latest
