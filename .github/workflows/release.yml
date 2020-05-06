@@ -10,11 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ls -la
-      - run: pwd
-      - name: run script
-        run: sh scripts/get-latest.sh
-      - name: get latest
-        run: ::set-env latest=$(sh scripts/get-latest.sh)
-      - name: echo latest
-        run: echo "$latest"
+      - name: Get latest
+        run: echo "##[set-output name=LATEST;]$(sh scripts/get-latest.sh)"
+      - name: Final
+        if: ${{ steps.nvm.outputs.LATEST }} == "ok"
+        run: echo "OK"
