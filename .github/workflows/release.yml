@@ -13,10 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Get latest
-        run: echo "##[set-output name=LATEST;]$(sh scripts/get-latest.sh)"
+        run: echo "##[set-output name=is_latest;]$(sh scripts/get-latest.sh)"
         id: release
       - name: display latest
-        run: echo "${{ steps.release.outputs.LATEST }}"
+        run: echo "${{ steps.release.outputs.is_latest }}"
       - name: Final
         run: echo "OK"
-        if: $(sh scripts/get-latest.sh) == 'KO'
+        if: steps.release.outputs.is_latest == 'true'
