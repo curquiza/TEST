@@ -11,6 +11,8 @@ jobs:
     steps:
       - run: ls -la
       - run: pwd
+      - name: run script
+        run: sh test.sh
       - name: get latest
         run: ::set-env latest=$(sh test.sh)
       - name: echo latest
