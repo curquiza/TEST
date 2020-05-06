@@ -12,7 +12,7 @@ jobs:
       - run: ls -la
       - run: pwd
       - name: run script
-        run: sh test.sh
+        run: sh scripts/test.sh
       - name: get latest
         run: ::set-env latest=$(sh test.sh)
       - name: echo latest
