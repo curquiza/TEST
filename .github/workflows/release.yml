@@ -9,6 +9,8 @@ jobs:
     name: test release
     runs-on: ubuntu-latest
     steps:
+      - run: ls -la
+      - run: pwd
       - name: get latest
         run: ::set-env latest=$(sh test.sh)
       - name: echo latest
