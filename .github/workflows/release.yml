@@ -15,6 +15,6 @@ jobs:
       - name: run script
         run: sh scripts/get-latest.sh
       - name: get latest
-        run: ::set-env latest=$(sh test.sh)
+        run: ::set-env latest=$(sh scripts/get-latest.sh)
       - name: echo latest
         run: echo "$latest"
