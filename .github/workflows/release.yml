@@ -7,14 +7,23 @@ name: TEST RELEASE
 on: push
 
 jobs:
-  myrelease:
-    name: test release
+  check_latest:
+    name: check latest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Get latest
         run: echo "##[set-output name=is_latest;]$(sh scripts/get-latest.sh)"
         id: release
+  myrelease:
+    needs: check_latest
+    name: test release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+#       - name: Get latest
+#         run: echo "##[set-output name=is_latest;]$(sh scripts/get-latest.sh)"
+#         id: release
       - name: display latest
         run: echo "${{ steps.release.outputs.is_latest }}"
       - name: Final
