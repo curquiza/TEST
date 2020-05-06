@@ -1,3 +1,3 @@
 #!/bin/sh
 
-echo "KO"
+echo "false"
