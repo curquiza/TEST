@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: brew install meilisearch
       - run: meilisearch --no-analytics=true &
-      - run: curl 'http://localhost:7700/indexes'
+      - run: curl 'http://localhost:7700/version'
 #       - name: Test
 #         run: |
 #           curl -L https://install.meilisearch.com | sh
