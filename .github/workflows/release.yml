@@ -9,7 +9,7 @@ on: push
 jobs:
   download_latest:
     name: check latest
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Test
