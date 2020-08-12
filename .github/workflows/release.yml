@@ -8,7 +8,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      - run: brew install meilisearch
+      - run: brew update && brew install meilisearch
       - run: meilisearch --no-analytics=true &
       - run: curl 'http://localhost:7700/version'
 #       - name: Test
