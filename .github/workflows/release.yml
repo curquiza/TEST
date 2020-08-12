@@ -1,9 +1,5 @@
 name: TEST RELEASE
 
-# on:
-#   release:
-#     types: [published]
-
 on: push
 
 jobs:
@@ -13,8 +9,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: brew install meilisearch
-      - name: Test
-        run: |
-          curl -L https://install.meilisearch.com | sh
-          ls -la .
-          head -1 meilisearch
+      - run: meilisearch --no-analytics=true &
+      - run: curl 'http://localhost:7700/indexes'
+#       - name: Test
+#         run: |
+#           curl -L https://install.meilisearch.com | sh
+#           ls -la .
+#           head -1 meilisearch
