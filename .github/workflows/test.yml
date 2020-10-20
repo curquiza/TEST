@@ -3,11 +3,12 @@
 name: CI
 
 on:
-  pull_request:
+  push:
     branches:
       - master
       - trying
       - staging
+  pull_request:
 
 jobs:
   test:
