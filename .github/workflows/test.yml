@@ -4,12 +4,16 @@ name: CI
 
 on:
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
+      - trying
+      - staging
 
 jobs:
   test:
+    name: test
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v2
 
