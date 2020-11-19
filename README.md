@@ -1,4 +1,4 @@
-# Un titre
+# A title: {{ release_version }}
 
 lol2
 
