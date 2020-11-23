@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    name: pre-release-basic-test
+    name: basic-test-against-rc
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
