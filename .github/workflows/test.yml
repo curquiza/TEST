@@ -8,13 +8,14 @@ on:
       - master
       - trying
       - staging
-  pull_request:
-    branches-ignore: bump-meilisearch-v*
+    pull_request:
 
 jobs:
   test:
     name: basic-test
     runs-on: ubuntu-latest
+    # Will not run if the event is a pre-release PR (to bump-meilisearch-v*)
+    if: github.event_name != 'pull_request' || startsWith(github.base_ref, 'bump-meilisearch-v') != true
     steps:
       - uses: actions/checkout@v2
       - name: Use default MeiliSearch version (latest)
@@ -23,3 +24,11 @@ jobs:
         run: |
           bash test.sh ${{ env.MEILISEARCH_VERSION }}
           exit 1
+
+  linter:
+    name: linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run linter
+        run: echo "OK"

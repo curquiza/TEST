@@ -4,17 +4,13 @@ name: Pre-Release Tests
 
 on:
   push:
-    branches:
-      - bump-meilisearch-v*
-      - trying
-      - staging
+    branches: bump-meilisearch-v*
   pull_request:
-    branches:
-      - bump-meilisearch-v*
+    branches: bump-meilisearch-v*
 
 jobs:
   test:
-    name: basic-test
+    name: pre-release-basic-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
