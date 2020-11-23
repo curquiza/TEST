@@ -14,9 +14,13 @@ jobs:
   test:
     name: basic-test
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
-      - name: Run test
-        run: bash test.sh
+      - name: Use default MeiliSearch version (latest)
+        run: echo "MEILISEARCH_VERSION=latest" >> $GITHUB_ENV
+      - name: Use a MeiliSearch RC if GHA triggered for a pre-release PR
+        # If the event is a PR and the base ref branch is `bump-meilisearch-v*`
+        if: github.event_name == 'pull_request' && startsWith(github.base_ref, 'bump-meilisearch-v')
+        run: echo "MEILISEARCH_VERSION=$(curl https://raw.githubusercontent.com/meilisearch/integration-guides/master/scripts/get-latest-meilisearch-rc.sh | bash)" >> $GITHUB_ENV
+      - name: Run test against MeiliSearch ${{ env.MEILISEARCH_VERSION }}
+        run: bash test.sh ${{ env.MEILISEARCH_VERSION }}

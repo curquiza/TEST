@@ -1,2 +1,2 @@
 status = ["basic-test"]
-use_squash_merge = true
+# use_squash_merge = true
