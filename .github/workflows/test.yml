@@ -13,9 +13,12 @@ on:
 jobs:
   test:
     name: basic-test
-    if: github.base_ref != 'master'
+    # if: github.base_ref != 'master'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run test
         run: bash test.sh
+      - run: echo ${{ github.event }}
+      - run: echo ${{ github.event_name }}
+      - run: echo ${{ github.event_path }}
