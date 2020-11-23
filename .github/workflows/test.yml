@@ -20,4 +20,6 @@ jobs:
       - name: Use default MeiliSearch version (latest)
         run: echo "MEILISEARCH_VERSION=latest" >> $GITHUB_ENV
       - name: Run test against MeiliSearch ${{ env.MEILISEARCH_VERSION }}
-        run: bash test.sh ${{ env.MEILISEARCH_VERSION }}
+        run: |
+          bash test.sh ${{ env.MEILISEARCH_VERSION }}
+          exit 1
