@@ -15,7 +15,7 @@ jobs:
     name: basic-test
     runs-on: ubuntu-latest
     # Will not run if the event is a pre-release PR (to bump-meilisearch-v*)
-    if: github.event_name != 'pull_request' || startsWith(github.base_ref, 'bump-meilisearch-v') != true
+    if: github.event_name != 'pull_request' || !startsWith(github.base_ref, 'bump-meilisearch-v')
     steps:
       - uses: actions/checkout@v2
       - name: Use default MeiliSearch version (latest)
