@@ -2,19 +2,26 @@ name: Manually triggered workflow
 on:
   workflow_dispatch:
     inputs:
-      name:
-        description: 'Person to greet'
-        required: true
-        default: 'Mona the Octocat'
-      home:
-        description: 'location'
+      bench_name:
+        description: 'The name of the benchmark'
         required: false
-        default: 'The Octoverse'
+        default: 'smol-song'
+      dataset_path:
+        description: 'The dataset path (remote)'
+        required: false
+        default: 'https://s3.blabla.com'
 
 jobs:
-  say_hello:
+  run_benchmark:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "Hello ${{ github.event.inputs.name }}!"
-        echo "- in ${{ github.event.inputs.home }}!"
+      - name: Get current branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: current_branch
+      - name: Run benchmark
+        run: echo "cargo run ${{ github.event.inputs.bench_name }} ${{ github.event.inputs.dataset_path }} in branch ${{ steps.current_branch.outputs.branch }}
+#       - uses: actions-rs/cargo@v1
+#         with:
+#           command: bench 
+#           args: ${{ github.event.inputs.bench_name }} ${{ github.event.inputs.dataset_path }}
