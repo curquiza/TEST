@@ -21,6 +21,10 @@ jobs:
         id: current_branch
       - name: Run benchmark
         run: echo "cargo run ${{ github.event.inputs.bench_name }} ${{ github.event.inputs.dataset_path }} in branch ${{ steps.current_branch.outputs.branch }}"
+      - name: test
+        run: |
+          echo $GITHUB_SHA
+          echo ${{ github.event.pull_request.head.sha }}
 #       - uses: actions-rs/cargo@v1
 #         with:
 #           command: bench 
