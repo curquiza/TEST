@@ -2,7 +2,7 @@ name: Release - pre release tests
 
 on:
   release:
-    types: [publish]
+    types: [published]
   push:
     tags:
       - '*'
