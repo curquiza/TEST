@@ -1,0 +1,32 @@
+name: Release - pre release tests
+
+on:
+  push:
+    tags:
+      - '*'
+      
+      
+jobs:
+  release:
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v2
+      - name: release
+        if: github.event_name.release
+        run: echo 'test'
+
+  release2:
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v2
+      - name: release2
+        if: github.event_name == 'release'
+        run: echo 'test'
+        
+  release-but-not-pre-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: release but not pre-release
+        if: github.event_name.release && !github.event_name.release.prerelease
+        run: echo 'test'
