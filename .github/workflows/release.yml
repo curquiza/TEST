@@ -1,11 +1,11 @@
 name: Release - pre release tests
 
 on:
+  release:
+    types: [publish]
   push:
     tags:
       - '*'
-  release:
-    types: [publish]
       
       
 jobs:
