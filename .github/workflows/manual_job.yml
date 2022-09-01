@@ -12,21 +12,16 @@ on:
         default: 'https://s3.blabla.com'
 
 jobs:
-  run_benchmark:
+  run-benchmark:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Get current branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: current_branch
-      - name: Run benchmark
-        run: echo "cargo run ${{ github.event.inputs.bench_name }} ${{ github.event.inputs.dataset_path }} in branch ${{ steps.current_branch.outputs.branch }}"
-      - name: test
-        run: |
-          echo $GITHUB_SHA
-          echo ${{ github.event.pull_request.head.sha }}
-#       - uses: actions-rs/cargo@v1
-#         with:
-#           command: bench 
-#           args: ${{ github.event.inputs.bench_name }} ${{ github.event.inputs.dataset_path }}
+      - name: skip step
+        if: github.event == 'schedule'
+        run: echo 'lol'
+  
+  next-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo 'OK'
